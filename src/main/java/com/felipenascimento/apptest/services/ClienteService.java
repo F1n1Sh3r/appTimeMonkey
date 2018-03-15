@@ -21,5 +21,10 @@ public class ClienteService {
 		}
 		return obj;
 	}
+	
+	public Cliente insert(Cliente obj) {
+		obj.setId(null);
+		return repo.save(obj);
+	}
 
 }
