@@ -1,8 +1,8 @@
 package com.felipenascimento.apptest.resources;
 
-import static org.springframework.test.web.client.response.MockRestResponseCreators.withNoContent;
-
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.felipenascimento.apptest.domain.Cliente;
+import com.felipenascimento.apptest.dto.ClienteDTO;
 import com.felipenascimento.apptest.services.ClienteService;
 
 @RestController
@@ -48,6 +49,13 @@ public class ClienteResource {
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@RequestMapping( method = RequestMethod.GET)
+	public ResponseEntity<List<ClienteDTO>> findAll() {
+		List<Cliente> list = service.findAll();
+		List<ClienteDTO> listDto = list.stream().map(obj -> new ClienteDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDto);
 	}
 	
 }

@@ -1,5 +1,7 @@
 package com.felipenascimento.apptest.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +37,10 @@ public class ClienteService {
 	public void delete(Integer id) {
 		find(id);
 		repo.delete(id);
+	}
+	
+	public List<Cliente> findAll() {
+		return repo.findAll();
 	}
 
 }
