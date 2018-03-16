@@ -7,7 +7,9 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.felipenascimento.apptest.domain.Cliente;
+import com.felipenascimento.apptest.services.validation.ClienteInsert;
 
+@ClienteInsert
 public class ClienteDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 		private Integer id;
