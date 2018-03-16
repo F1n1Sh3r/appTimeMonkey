@@ -14,9 +14,10 @@ public class DBService {
 	private ClienteRepository clienteRepository;
 	public void instantiateTestDataBase() {
 		
-		Cliente cli1 = new Cliente(null, "Felipe Nascimento", "felipe1.jn@gmail.com", "32132148");
+		Cliente cli1 = new Cliente(null, "Felipe Nascimento", "felipe1.jn@gmail.com", "123456789");
+		Cliente cli2 = new Cliente(null, "Bruno Oliveira", "bruno@monkey.exchange", "987654321");
 
-		clienteRepository.save(Arrays.asList(cli1));
+		clienteRepository.save(Arrays.asList(cli1,cli2));
 		
 	}
 }
