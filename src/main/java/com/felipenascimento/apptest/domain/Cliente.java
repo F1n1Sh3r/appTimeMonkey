@@ -1,10 +1,6 @@
 package com.felipenascimento.apptest.domain;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.CollectionTable;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,25 +11,21 @@ public class Cliente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
 	private String email;
-	
-	
-	@ElementCollection
-	@CollectionTable(name="TELEFONE")
-	private Set<String> telefones = new HashSet<>();
-	
-	
+	private String telefone;
+
 	public Cliente() {
 	}
 
-	public Cliente(Integer id, String nome, String email) {
+	public Cliente(Integer id, String nome, String email, String telefone) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
+		this.telefone = telefone;
 	}
 
 	public Integer getId() {
@@ -59,13 +51,15 @@ public class Cliente implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Set<String> getTelefones() {
-		return telefones;
+	
+	public String getTelefone() {
+		return telefone;
 	}
 
-	public void setTelefones(Set<String> telefones) {
-		this.telefones = telefones;
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
 	}
+
 
 	@Override
 	public int hashCode() {
@@ -90,6 +84,6 @@ public class Cliente implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}	
+	}
 
 }

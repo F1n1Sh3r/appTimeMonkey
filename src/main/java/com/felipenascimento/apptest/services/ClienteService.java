@@ -34,8 +34,9 @@ public class ClienteService {
 	}
 	
 	public Cliente update(Cliente obj) {
-		find(obj.getId());
-		return repo.save(obj);
+		Cliente newObj = find(obj.getId());
+		updateData(newObj, obj);
+		return repo.save(newObj);
 	}
 	
 	public void delete(Integer id) {
@@ -52,9 +53,15 @@ public class ClienteService {
 		return repo.findAll(pageRequest);
 	}
 	
-	// metodo auxiliar DTO Cliente
+	
 	public Cliente fromDTO(ClienteDTO objDto) {
-		return new Cliente (objDto.getId(), objDto.getNome(), objDto.getEmail());
+		return new Cliente (objDto.getId(), objDto.getNome(), objDto.getEmail(), objDto.getTelefone());
 	}
+	
 
+	private void updateData (Cliente newObj, Cliente obj) {
+		newObj.setNome(obj.getNome());
+		newObj.setEmail(obj.getEmail());
+		newObj.setTelefone(obj.getTelefone());
+	}
 }

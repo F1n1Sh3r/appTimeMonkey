@@ -23,9 +23,8 @@ public class AppTimeMonkeyApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-				Cliente cli1 = new Cliente(null, "Felipe Nascimento", "felipe1.jn@gmail.com");
-		
-		cli1.getTelefones().addAll(Arrays.asList("27363323"));
+				Cliente cli1 = new Cliente(null, "Felipe Nascimento", "felipe1.jn@gmail.com", "32132148");
+
 		clienteRepository.save(Arrays.asList(cli1));
 		
 		
