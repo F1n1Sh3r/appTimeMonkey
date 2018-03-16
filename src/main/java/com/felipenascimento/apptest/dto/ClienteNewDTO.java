@@ -7,11 +7,10 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.felipenascimento.apptest.domain.Cliente;
-import com.felipenascimento.apptest.services.validation.ClienteUpdate;
+import com.felipenascimento.apptest.services.validation.ClienteInsert;
 
-@ClienteUpdate
-
-public class ClienteDTO implements Serializable {
+@ClienteInsert
+public class ClienteNewDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 		private Integer id;
 		
@@ -34,11 +33,11 @@ public class ClienteDTO implements Serializable {
 			this.email = email;
 		}
 
-		public ClienteDTO() {
+		public ClienteNewDTO() {
 			
 		}
 		
-		public ClienteDTO( Cliente obj) {
+		public ClienteNewDTO( Cliente obj) {
 			id = obj.getId();
 			nome = obj.getNome();
 			email = obj.getEmail();

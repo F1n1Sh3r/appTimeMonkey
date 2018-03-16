@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.felipenascimento.apptest.domain.Cliente;
 import com.felipenascimento.apptest.dto.ClienteDTO;
+import com.felipenascimento.apptest.dto.ClienteNewDTO;
 import com.felipenascimento.apptest.repositories.ClienteRepository;
 import com.felipenascimento.apptest.services.exceptions.ObjectNotFoundException;
 
@@ -56,6 +57,10 @@ public class ClienteService {
 	
 	public Cliente fromDTO(ClienteDTO objDto) {
 		return new Cliente (objDto.getId(), objDto.getNome(), objDto.getEmail(), objDto.getTelefone());
+	}
+	
+	public Cliente fromDTO(ClienteNewDTO objDto) {
+		return new Cliente (null, objDto.getNome(), objDto.getEmail(), objDto.getTelefone());
 	}
 	
 
