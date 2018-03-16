@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +35,8 @@ public class ClienteResource {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@RequestBody Cliente obj) {
+	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteDTO objDto) {
+		Cliente obj = service.fromDTO(objDto);
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();
@@ -41,7 +44,8 @@ public class ClienteResource {
 	}
 
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public ResponseEntity<Cliente> update(@RequestBody Cliente obj, @PathVariable Integer id) {
+	public ResponseEntity<Cliente> update(@Valid @RequestBody ClienteDTO objDto, @PathVariable Integer id) {
+		Cliente obj = service.fromDTO(objDto);
 		obj.setId(id);
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
@@ -64,8 +68,8 @@ public class ClienteResource {
 	public ResponseEntity<Page<ClienteDTO>> findPage(
 			@RequestParam  (value="page", defaultValue="0")Integer page,
 			@RequestParam  (value="linesPerPage", defaultValue="24") Integer linesPerPage, 
-			@RequestParam  (value="orderBy", defaultValue="0") String orderBy,
-			@RequestParam  (value="direction", defaultValue="0")String direction) {
+			@RequestParam  (value="orderBy", defaultValue="nome") String orderBy,
+			@RequestParam  (value="direction", defaultValue="ASC")String direction) {
 		Page<Cliente> list = service.findPage( page, linesPerPage, orderBy, direction);
 		Page<ClienteDTO> listDto = list.map(obj -> new ClienteDTO(obj));
 		return ResponseEntity.ok().body(listDto);

@@ -9,6 +9,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.felipenascimento.apptest.domain.Cliente;
+import com.felipenascimento.apptest.dto.ClienteDTO;
 import com.felipenascimento.apptest.repositories.ClienteRepository;
 import com.felipenascimento.apptest.services.exceptions.ObjectNotFoundException;
 
@@ -49,6 +50,11 @@ public class ClienteService {
 	public Page<Cliente> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
 		PageRequest pageRequest =  new PageRequest(page, linesPerPage,Direction.valueOf(direction), orderBy);
 		return repo.findAll(pageRequest);
+	}
+	
+	// metodo auxiliar DTO Cliente
+	public Cliente fromDTO(ClienteDTO objDto) {
+		return new Cliente (objDto.getId(), objDto.getNome(), objDto.getEmail());
 	}
 
 }
