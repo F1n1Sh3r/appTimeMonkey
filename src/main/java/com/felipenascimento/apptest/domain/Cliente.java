@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Cliente implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -18,16 +20,20 @@ public class Cliente implements Serializable {
 	
 	private String email;
 	private String telefone;
+	
+	@JsonIgnore
+	private String senha;
 
 	public Cliente() {
 	}
 
-	public Cliente(Integer id, String nome, String email, String telefone) {
+	public Cliente(Integer id, String nome, String email, String telefone, String senha) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.telefone = telefone;
+		this.senha = senha;
 	}
 
 	public Integer getId() {
@@ -60,6 +66,14 @@ public class Cliente implements Serializable {
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 

@@ -24,6 +24,8 @@ public class ClienteNewDTO implements Serializable {
 		
 		@NotEmpty(message="O campo 'Telefone' é obrigatório! ")
 		private String telefone;
+		@NotEmpty(message="O campo 'Senha' é obrigatório! ")
+		private String senha;
 		
 		public String getEmail() {
 			return email;
@@ -42,6 +44,7 @@ public class ClienteNewDTO implements Serializable {
 			nome = obj.getNome();
 			email = obj.getEmail();
 			telefone = obj.getTelefone();
+			senha = obj.getSenha();
 		}
 		
 		
@@ -67,6 +70,14 @@ public class ClienteNewDTO implements Serializable {
 
 		public void setTelefone(String telefone) {
 			this.telefone = telefone;
+		}
+
+		public String getSenha() {
+			return senha;
+		}
+
+		public void setSenha(String senha) {
+			this.senha = senha;
 		}
 		
 }
