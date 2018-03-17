@@ -1,12 +1,20 @@
 package com.felipenascimento.apptest.domain;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.felipenascimento.apptest.domain.enums.Perfil;
 
 @Entity
 public class Cliente implements Serializable {
@@ -17,13 +25,17 @@ public class Cliente implements Serializable {
 	private Integer id;
 	private String nome;
 	
-	
 	private String email;
 	private String telefone;
 	
 	@JsonIgnore
 	private String senha;
 
+
+	@ElementCollection(fetch=FetchType.EAGER)
+	@CollectionTable(name="PERFIS")
+	private Set<Integer> perfis = new HashSet<>();
+	
 	public Cliente() {
 	}
 
@@ -34,6 +46,7 @@ public class Cliente implements Serializable {
 		this.email = email;
 		this.telefone = telefone;
 		this.senha = senha;
+		addPerfil(Perfil.CLIENTE);
 	}
 
 	public Integer getId() {
@@ -74,6 +87,15 @@ public class Cliente implements Serializable {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+	
+	 	
+	public Set<Perfil> getPerfis(){
+		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
+	}
+	
+	public void addPerfil (Perfil perfil) {
+		perfis.add(perfil.getCod());
 	}
 
 
