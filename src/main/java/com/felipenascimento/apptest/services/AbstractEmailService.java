@@ -1,5 +1,7 @@
 package com.felipenascimento.apptest.services;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 
@@ -21,8 +23,10 @@ public abstract class AbstractEmailService implements EmailService{
 		SimpleMailMessage sm = new SimpleMailMessage();
 		sm.setTo(sender);
 		sm.setFrom(sender);
-		sm.setSubject("Teste Mail");
-		return null;
+		sm.setSubject("Teste Mail \n Nome: " + obj.getNome() + "\n Email: "+ obj.getEmail());
+		sm.setSentDate(new Date(System.currentTimeMillis()));
+		sm.setText(obj.toString());
+		return sm;
 	}
 	
 }
