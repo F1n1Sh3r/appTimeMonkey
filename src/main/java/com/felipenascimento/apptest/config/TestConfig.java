@@ -23,9 +23,9 @@ public class TestConfig {
 		dbService.instantiateTestDataBase();
 		return true;
 	}
-	
+	@Bean
 	public EmailService emailservice() {
-		return new MockEmailService();
+		return new MockEmailService(); 
 	}
 	
 }

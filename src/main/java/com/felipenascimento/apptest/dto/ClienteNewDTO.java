@@ -34,10 +34,12 @@ public class ClienteNewDTO implements Serializable {
 		public void setEmail(String email) {
 			this.email = email;
 		}
+		
 
 		public ClienteNewDTO() {
 			
 		}
+
 		
 		public ClienteNewDTO( Cliente obj) {
 			id = obj.getId();

@@ -1,17 +1,22 @@
 package com.felipenascimento.apptest.domain;
 
 import java.io.Serializable;
+
 import java.util.HashSet;
+
 import java.util.Set;
 import java.util.stream.Collectors;
 
+
 import javax.persistence.CollectionTable;
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.felipenascimento.apptest.domain.enums.Perfil;
@@ -24,13 +29,17 @@ public class Cliente implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-	
+
+
+	@Column(unique=true)
 	private String email;
 	private String telefone;
 	
+
+	
 	@JsonIgnore
 	private String senha;
-
+	
 
 	@ElementCollection(fetch=FetchType.EAGER)
 	@CollectionTable(name="PERFIS")
@@ -98,7 +107,6 @@ public class Cliente implements Serializable {
 		perfis.add(perfil.getCod());
 	}
 
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -123,5 +131,6 @@ public class Cliente implements Serializable {
 			return false;
 		return true;
 	}
+
 
 }
